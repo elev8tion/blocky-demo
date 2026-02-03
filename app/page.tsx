@@ -104,26 +104,27 @@ export default function BlockyPage() {
       <div className="relative z-10">
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-slate-950/50 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
             <div className="flex items-center gap-2 text-white">
-              <Boxes className="w-6 h-6 text-blue-400" />
-              <span className="font-bold text-lg">Blocky</span>
+              <Boxes className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+              <span className="font-bold text-base sm:text-lg">Blocky</span>
             </div>
             <a
               href="https://github.com/elev8tion/blocky"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors text-sm sm:text-base"
             >
-              <Github className="w-5 h-5" />
-              <span>View on GitHub</span>
-              <ExternalLink className="w-4 h-4" />
+              <Github className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden xs:inline sm:inline">View on GitHub</span>
+              <span className="xs:hidden sm:hidden">GitHub</span>
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
             </a>
           </div>
         </nav>
 
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-6">
+        <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -136,16 +137,16 @@ export default function BlockyPage() {
                 <span className="text-sm font-medium">Multi-Language Code Composer</span>
               </div>
 
-              <h1 className="text-6xl md:text-7xl font-bold text-white mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-4">
                 Blocky
               </h1>
 
-              <p className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto leading-relaxed px-4">
                 Visual no-code platform for extracting reusable code blocks from production codebases with{" "}
                 <span className="text-blue-400 font-semibold">MCP integration</span>
               </p>
 
-              <div className="flex flex-wrap gap-3 justify-center mt-8">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mt-6 sm:mt-8 px-4">
                 <span className="px-4 py-2 rounded-full bg-blue-500/20 text-blue-300 text-sm font-medium">
                   React/TypeScript
                 </span>
@@ -178,23 +179,23 @@ export default function BlockyPage() {
               </LiquidGlass>
 
               {/* Floating Stats */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-4">
+              <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 md:gap-4 w-full max-w-md px-4 justify-center">
                 <LiquidGlass>
-                  <div className="px-6 py-3 text-center">
-                    <div className="text-2xl font-bold text-white">3</div>
-                    <div className="text-sm text-blue-300">Languages</div>
+                  <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 text-center">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">3</div>
+                    <div className="text-xs sm:text-sm text-blue-300">Languages</div>
                   </div>
                 </LiquidGlass>
                 <LiquidGlass>
-                  <div className="px-6 py-3 text-center">
-                    <div className="text-2xl font-bold text-white">MCP</div>
-                    <div className="text-sm text-blue-300">Integrated</div>
+                  <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 text-center">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">MCP</div>
+                    <div className="text-xs sm:text-sm text-blue-300">Integrated</div>
                   </div>
                 </LiquidGlass>
                 <LiquidGlass>
-                  <div className="px-6 py-3 text-center">
-                    <div className="text-2xl font-bold text-white">Visual</div>
-                    <div className="text-sm text-blue-300">Canvas</div>
+                  <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 text-center">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-white">Visual</div>
+                    <div className="text-xs sm:text-sm text-blue-300">Canvas</div>
                   </div>
                 </LiquidGlass>
               </div>
@@ -203,24 +204,24 @@ export default function BlockyPage() {
         </section>
 
         {/* Features Grid */}
-        <section className="py-20 px-6 mt-16">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 mt-12 sm:mt-16">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-4">
                 Powerful Features
               </h2>
-              <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto px-4">
                 Everything you need to extract, compose, and manage reusable code blocks
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
@@ -259,24 +260,24 @@ export default function BlockyPage() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 px-6">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-4">
                 How It Works
               </h2>
-              <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto px-4">
                 Three simple steps to transform your codebase into reusable blocks
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               {workflow.map((step, index) => (
                 <motion.div
                   key={step.number}
@@ -305,24 +306,24 @@ export default function BlockyPage() {
         </section>
 
         {/* Tech Stack */}
-        <section className="py-20 px-6">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-4">
                 Tech Stack
               </h2>
-              <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto px-4">
                 Built with modern technologies for performance and reliability
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {techStack.map((stack, index) => (
                 <motion.div
                   key={stack.category}
@@ -353,7 +354,7 @@ export default function BlockyPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6">
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -362,24 +363,24 @@ export default function BlockyPage() {
               transition={{ duration: 0.6 }}
             >
               <LiquidGlass>
-                <div className="p-12 text-center">
-                  <Github className="w-16 h-16 text-blue-400 mx-auto mb-6" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <div className="p-6 sm:p-8 md:p-12 text-center">
+                  <Github className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-blue-400 mx-auto mb-4 sm:mb-6" />
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 px-4">
                     Ready to Get Started?
                   </h2>
-                  <p className="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
+                  <p className="text-base sm:text-lg md:text-xl text-blue-200 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
                     Explore the codebase, contribute, or start extracting blocks from your projects today.
                   </p>
-                  <div className="flex flex-wrap gap-4 justify-center">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
                     <a
                       href="https://github.com/elev8tion/blocky"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105"
+                      className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105 text-sm sm:text-base"
                     >
-                      <Github className="w-5 h-5" />
+                      <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                       View on GitHub
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                     </a>
                   </div>
                 </div>
@@ -389,10 +390,10 @@ export default function BlockyPage() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 border-t border-white/10">
+        <footer className="py-6 sm:py-8 px-4 sm:px-6 border-t border-white/10">
           <div className="max-w-7xl mx-auto text-center text-blue-300">
-            <p>Built with Next.js, TypeScript, and Framer Motion</p>
-            <p className="text-sm text-blue-400 mt-2">© 2025 Blocky. All rights reserved.</p>
+            <p className="text-sm sm:text-base">Built with Next.js, TypeScript, and Framer Motion</p>
+            <p className="text-xs sm:text-sm text-blue-400 mt-2">© 2025 Blocky. All rights reserved.</p>
           </div>
         </footer>
       </div>
