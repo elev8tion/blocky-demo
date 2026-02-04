@@ -5,415 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blocky - Multi-Language Code Composer</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
-      color: white;
-      line-height: 1.6;
       min-height: 100vh;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 1.25rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.1);
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    section {
-      padding: 5rem 0;
-    }
-
-    .hero {
-      padding-top: 8rem;
+      max-width: 90%;
+      padding: 2rem;
       text-align: center;
     }
 
-    .hero h1 {
-      font-size: 4rem;
+    h1 {
+      color: white;
+      font-size: 3rem;
       margin-bottom: 1rem;
-      font-weight: 800;
     }
 
-    .hero p {
-      font-size: 1.5rem;
+    p {
       color: #93c5fd;
+      font-size: 1.25rem;
       margin-bottom: 2rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .tags {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
       margin: 2rem 0;
     }
 
-    .tag {
-      padding: 0.5rem 1rem;
-      background: rgba(59, 130, 246, 0.2);
-      border-radius: 2rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1.5rem;
-      padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    }
-
-    .hero-image {
-      max-width: 100%;
-      border-radius: 1rem;
-      margin: 3rem 0;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .stats {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: -3rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .stat-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1rem;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-
-    .stat-card .number {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 0.25rem;
-    }
-
-    .stat-card .label {
-      font-size: 0.875rem;
-      color: #93c5fd;
-    }
-
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .subtitle {
-      text-align: center;
-      font-size: 1.25rem;
-      color: #93c5fd;
-      margin-bottom: 3rem;
-    }
-
-    .grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1.5rem;
-      padding: 2rem;
-    }
-
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin: 1rem 0;
-    }
-
-    .feature-card p {
-      color: #93c5fd;
-      margin-bottom: 1rem;
-    }
-
-    .feature-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .feature-tag {
-      padding: 0.25rem 0.75rem;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 0.5rem;
-      font-size: 0.75rem;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 4rem 0;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    a {
+      display: inline-block;
       padding: 1rem 2rem;
       background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-      border: none;
-      border-radius: 0.75rem;
       color: white;
-      font-size: 1.125rem;
-      font-weight: 600;
       text-decoration: none;
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      transition: transform 0.2s;
     }
 
-    .btn-primary:hover {
+    a:hover {
       transform: scale(1.05);
-      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.5);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: #93c5fd;
-    }
-
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero p {
-        font-size: 1.125rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .stats {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      nav {
-        padding: 1rem;
-      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div class="logo">
-      📦 <span>Blocky</span>
-    </div>
-    <a href="https://github.com/elev8tion/blocky" target="_blank" class="btn">
-      View on GitHub →
-    </a>
-  </nav>
+  <div class="container">
+    <h1>Blocky</h1>
+    <p>Multi-Language Code Composer - Visual Platform Demo</p>
 
-  <section class="hero">
-    <div class="container">
-      <div class="tag" style="display: inline-block;">Multi-Language Code Composer</div>
-      <h1>Blocky</h1>
-      <p>Visual no-code platform for extracting reusable code blocks from production codebases with <strong>MCP integration</strong></p>
+    <img src="images/blocky-ui.png" alt="Blocky Visual Composer Interface">
 
-      <div class="tags">
-        <span class="tag">React/TypeScript</span>
-        <span class="tag">FastAPI/Python</span>
-        <span class="tag">Flutter/Dart</span>
-      </div>
-
-      <div class="glass-card">
-        <img src="/images/blocky-ui.png" alt="Blocky Composer Interface" class="hero-image">
-      </div>
-
-      <div class="stats">
-        <div class="stat-card">
-          <div class="number">3</div>
-          <div class="label">Languages</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">MCP</div>
-          <div class="label">Integrated</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">Visual</div>
-          <div class="label">Canvas</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2>Powerful Features</h2>
-      <p class="subtitle">Everything you need to extract, compose, and manage reusable code blocks</p>
-
-      <div class="grid">
-        <div class="feature-card">
-          <div style="font-size: 2rem;">💻</div>
-          <h3>Multi-Language Extraction</h3>
-          <p>Extract reusable code blocks from React/TypeScript, FastAPI/Python, and Flutter/Dart projects with intelligent AST parsing.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">React/Node</span>
-            <span class="feature-tag">FastAPI</span>
-            <span class="feature-tag">Flutter/Dart</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div style="font-size: 2rem;">🎨</div>
-          <h3>Visual Canvas Composition</h3>
-          <p>No-code visual interface for wiring blocks together, creating complex workflows, and exporting composition graphs.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">Drag & Drop</span>
-            <span class="feature-tag">Real-time</span>
-            <span class="feature-tag">Export JSON</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div style="font-size: 2rem;">✨</div>
-          <h3>MCP Integration</h3>
-          <p>Model Context Protocol integration enables AI-assisted workflows, intelligent block suggestions, and automated conversions.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">AI-Powered</span>
-            <span class="feature-tag">Claude Integration</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div style="font-size: 2rem;">📋</div>
-          <h3>JSON Manifest System</h3>
-          <p>Standardized block manifests with schema validation ensure consistency across all extracted code blocks.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">Schema Validation</span>
-            <span class="feature-tag">Type-Safe</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div style="font-size: 2rem;">⚡</div>
-          <h3>Real-Time Extraction</h3>
-          <p>Extract projects directly from the UI with instant feedback, live preview, and automatic registry updates.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">Live Updates</span>
-            <span class="feature-tag">Fast</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div style="font-size: 2rem;">📚</div>
-          <h3>Block Registry</h3>
-          <p>Centralized registry of all extracted blocks with search, filtering, and intelligent categorization.</p>
-          <div class="feature-tags">
-            <span class="feature-tag">Searchable</span>
-            <span class="feature-tag">Organized</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h2>How It Works</h2>
-      <p class="subtitle">Three simple steps to transform your codebase into reusable blocks</p>
-
-      <div class="grid">
-        <div class="glass-card" style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">01</div>
-          <h3>Extract</h3>
-          <p>Run extractors on your React, FastAPI, or Flutter projects to mine reusable code blocks with intelligent AST parsing.</p>
-        </div>
-
-        <div class="glass-card" style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">02</div>
-          <h3>Compose</h3>
-          <p>Use the visual canvas to wire blocks together, create dependencies, and build complex workflows without writing code.</p>
-        </div>
-
-        <div class="glass-card" style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">03</div>
-          <h3>Deploy</h3>
-          <p>Export graph JSON, integrate with your workflow, or use MCP integration for AI-assisted development.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta">
-    <div class="container">
-      <div class="glass-card">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
-        <h2>Ready to Get Started?</h2>
-        <p class="subtitle">Explore the codebase, contribute, or start extracting blocks from your projects today.</p>
-        <a href="https://github.com/elev8tion/blocky" target="_blank" class="btn-primary">
-          View on GitHub →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>Built with Next.js, TypeScript, and Framer Motion</p>
-    <p style="font-size: 0.875rem; margin-top: 0.5rem;">© 2025 Blocky. All rights reserved.</p>
-  </footer>
+    <a href="https://github.com/elev8tion/blocky" target="_blank">View on GitHub →</a>
+  </div>
 </body>
 </html>
