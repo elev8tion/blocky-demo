@@ -1,5 +1,7 @@
 [build]
+  command = "ls -la public"
   publish = "public"
+  ignore = "exit 0"
 
 [[redirects]]
   from = "/*"
