@@ -1,12 +1,5 @@
 [build]
-  command = "echo 'Serving standalone HTML - no build needed'"
   publish = "public"
-
-# Disable Next.js plugin - we're serving static HTML only
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    disable = true
 
 [[redirects]]
   from = "/*"
