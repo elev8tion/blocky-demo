@@ -5,69 +5,823 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blocky - Multi-Language Code Composer</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      box-sizing: border-box;
     }
 
-    .container {
-      max-width: 90%;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #020617 0%, #1e3a8a 50%, #020617 100%);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-blob-1 {
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      width: 24rem;
+      height: 24rem;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .bg-blob-2 {
+      position: absolute;
+      bottom: 25%;
+      right: 25%;
+      width: 24rem;
+      height: 24rem;
+      background: rgba(168, 85, 247, 0.1);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(2, 6, 23, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Glass Card Effect */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 8rem;
+      padding-bottom: 5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .hero-container {
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      text-center;
+      margin-bottom: 4rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: #bfdbfe;
+      max-width: 48rem;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .tag-blue {
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+    }
+
+    .tag-purple {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+    }
+
+    .tag-cyan {
+      background: rgba(6, 182, 212, 0.2);
+      color: #a5f3fc;
+    }
+
+    /* Hero Image Container */
+    .hero-image-container {
+      position: relative;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Floating Stats */
+    .stats-container {
+      position: absolute;
+      bottom: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      max-width: 28rem;
+      padding: 0 1rem;
+      justify-content: center;
+    }
+
+    .stat-card {
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #93c5fd;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-container {
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: #bfdbfe;
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+      color: #60a5fa;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      color: #bfdbfe;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .feature-tag {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      border-radius: 0.25rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    /* Workflow Steps */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .workflow-card {
       padding: 2rem;
       text-align: center;
     }
 
-    h1 {
-      color: white;
-      font-size: 3rem;
+    .workflow-number {
+      font-size: 4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 1rem;
     }
 
-    p {
-      color: #93c5fd;
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 1rem;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-      margin: 2rem 0;
-    }
-
-    a {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-      color: white;
-      text-decoration: none;
-      border-radius: 0.5rem;
+    .workflow-title {
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-top: 2rem;
-      transition: transform 0.2s;
+      margin-bottom: 0.75rem;
     }
 
-    a:hover {
+    .workflow-description {
+      color: #bfdbfe;
+      line-height: 1.5;
+    }
+
+    /* Tech Stack */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tech-card {
+      padding: 1.5rem;
+    }
+
+    .tech-category {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .tech-category-blue {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    }
+
+    .tech-category-purple {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    }
+
+    .tech-category-orange {
+      background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    }
+
+    .tech-list {
+      list-style: none;
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #bfdbfe;
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-check {
+      color: #4ade80;
+      font-weight: 700;
+    }
+
+    /* CTA Section */
+    .cta-card {
+      padding: 3rem 2rem;
+      text-align: center;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    .cta-icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto 1.5rem;
+      color: #60a5fa;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-description {
+      font-size: 1.125rem;
+      color: #bfdbfe;
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .cta-button:hover {
       transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: #93c5fd;
+    }
+
+    .footer-text {
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-copyright {
+      font-size: 0.75rem;
+      color: #60a5fa;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+      }
+
+      .features-grid,
+      .workflow-grid,
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-container {
+        bottom: -1.5rem;
+        gap: 0.5rem;
+      }
+
+      .stat-card {
+        padding: 0.5rem 1rem;
+      }
+
+      .stat-number {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Icon replacements using Unicode and CSS */
+    .icon {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      text-align: center;
+      font-size: 1.25rem;
+    }
+
+    .icon-lg {
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      font-size: 1.5rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Blocky</h1>
-    <p>Multi-Language Code Composer - Visual Platform Demo</p>
+  <!-- Background Effects -->
+  <div class="bg-effects">
+    <div class="bg-blob-1"></div>
+    <div class="bg-blob-2"></div>
+  </div>
 
-    <img src="images/blocky-ui.png" alt="Blocky Visual Composer Interface">
+  <!-- Content -->
+  <div class="content">
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="icon">⬡</span>
+          <span>Blocky</span>
+        </div>
+        <a href="https://github.com/elev8tion/blocky" target="_blank" rel="noopener noreferrer" class="nav-link">
+          <span class="icon">⚡</span>
+          <span>View on GitHub</span>
+          <span class="icon" style="font-size: 0.875rem;">→</span>
+        </a>
+      </div>
+    </nav>
 
-    <a href="https://github.com/elev8tion/blocky" target="_blank">View on GitHub →</a>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="icon" style="font-size: 1rem;">⬡</span>
+            <span>Multi-Language Code Composer</span>
+          </div>
+
+          <h1 class="hero-title">Blocky</h1>
+
+          <p class="hero-description">
+            Visual no-code platform for extracting reusable code blocks from production codebases with <strong style="color: #60a5fa;">MCP integration</strong>
+          </p>
+
+          <div class="hero-tags">
+            <span class="tag tag-blue">React/TypeScript</span>
+            <span class="tag tag-purple">FastAPI/Python</span>
+            <span class="tag tag-cyan">Flutter/Dart</span>
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="hero-image-container">
+          <div class="hero-image-wrapper glass-card">
+            <img src="images/blocky-ui.png" alt="Blocky Composer Visual Interface" class="hero-image">
+          </div>
+
+          <!-- Floating Stats -->
+          <div class="stats-container">
+            <div class="stat-card glass-card">
+              <div class="stat-number">3</div>
+              <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-card glass-card">
+              <div class="stat-number">MCP</div>
+              <div class="stat-label">Integrated</div>
+            </div>
+            <div class="stat-card glass-card">
+              <div class="stat-number">Visual</div>
+              <div class="stat-label">Canvas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section style="margin-top: 3rem;">
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">Powerful Features</h2>
+          <p class="section-subtitle">
+            Everything you need to extract, compose, and manage reusable code blocks
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">💻</div>
+            <h3 class="feature-title">Multi-Language Extraction</h3>
+            <p class="feature-description">
+              Extract reusable code blocks from React/TypeScript, FastAPI/Python, and Flutter/Dart projects with intelligent AST parsing.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">React/Node</span>
+              <span class="feature-tag">FastAPI</span>
+              <span class="feature-tag">Flutter/Dart</span>
+            </div>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">🔄</div>
+            <h3 class="feature-title">Visual Canvas Composition</h3>
+            <p class="feature-description">
+              No-code visual interface for wiring blocks together, creating complex workflows, and exporting composition graphs.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">Drag & Drop</span>
+              <span class="feature-tag">Real-time</span>
+              <span class="feature-tag">Export JSON</span>
+            </div>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">✨</div>
+            <h3 class="feature-title">MCP Integration</h3>
+            <p class="feature-description">
+              Model Context Protocol integration enables AI-assisted workflows, intelligent block suggestions, and automated conversions.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">AI-Powered</span>
+              <span class="feature-tag">Claude Integration</span>
+              <span class="feature-tag">Smart Suggestions</span>
+            </div>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">📄</div>
+            <h3 class="feature-title">JSON Manifest System</h3>
+            <p class="feature-description">
+              Standardized block manifests with schema validation ensure consistency across all extracted code blocks.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">Schema Validation</span>
+              <span class="feature-tag">Type-Safe</span>
+              <span class="feature-tag">Consistent</span>
+            </div>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">⚡</div>
+            <h3 class="feature-title">Real-Time Extraction</h3>
+            <p class="feature-description">
+              Extract projects directly from the UI with instant feedback, live preview, and automatic registry updates.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">Live Updates</span>
+              <span class="feature-tag">Fast</span>
+              <span class="feature-tag">Seamless</span>
+            </div>
+          </div>
+
+          <div class="glass-card feature-card">
+            <div class="feature-icon icon-lg">📚</div>
+            <h3 class="feature-title">Block Registry</h3>
+            <p class="feature-description">
+              Centralized registry of all extracted blocks with search, filtering, and intelligent categorization.
+            </p>
+            <div class="feature-tags">
+              <span class="feature-tag">Searchable</span>
+              <span class="feature-tag">Organized</span>
+              <span class="feature-tag">Reusable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section>
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            Three simple steps to transform your codebase into reusable blocks
+          </p>
+        </div>
+
+        <div class="workflow-grid">
+          <div class="glass-card workflow-card">
+            <div class="workflow-number">01</div>
+            <h3 class="workflow-title">Extract</h3>
+            <p class="workflow-description">
+              Run extractors on your React, FastAPI, or Flutter projects to mine reusable code blocks with intelligent AST parsing.
+            </p>
+          </div>
+
+          <div class="glass-card workflow-card">
+            <div class="workflow-number">02</div>
+            <h3 class="workflow-title">Compose</h3>
+            <p class="workflow-description">
+              Use the visual canvas to wire blocks together, create dependencies, and build complex workflows without writing code.
+            </p>
+          </div>
+
+          <div class="glass-card workflow-card">
+            <div class="workflow-number">03</div>
+            <h3 class="workflow-title">Deploy</h3>
+            <p class="workflow-description">
+              Export graph JSON, integrate with your workflow, or use MCP integration for AI-assisted development.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section>
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">Tech Stack</h2>
+          <p class="section-subtitle">
+            Built with modern technologies for performance and reliability
+          </p>
+        </div>
+
+        <div class="tech-grid">
+          <div class="glass-card tech-card">
+            <div class="tech-category tech-category-blue">Frontend</div>
+            <ul class="tech-list">
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>React 18</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>TypeScript</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>Vite</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>TailwindCSS</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-card tech-card">
+            <div class="tech-category tech-category-purple">Extractors</div>
+            <ul class="tech-list">
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>TypeScript (React/Node)</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>Python (FastAPI)</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>Dart (Flutter)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-card tech-card">
+            <div class="tech-category tech-category-orange">Integration</div>
+            <ul class="tech-list">
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>MCP Protocol</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>JSON Schema</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>AST Parsing</span>
+              </li>
+              <li class="tech-item">
+                <span class="tech-check">✓</span>
+                <span>Node.js Backend</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section>
+      <div class="section-container">
+        <div class="glass-card cta-card">
+          <div class="cta-icon icon-lg">🚀</div>
+          <h2 class="cta-title">Ready to Get Started?</h2>
+          <p class="cta-description">
+            Explore the codebase, contribute, or start extracting blocks from your projects today.
+          </p>
+          <a href="https://github.com/elev8tion/blocky" target="_blank" rel="noopener noreferrer" class="cta-button">
+            <span class="icon">⚡</span>
+            <span>View on GitHub</span>
+            <span class="icon" style="font-size: 0.875rem;">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p class="footer-text">Built with Next.js, TypeScript, and Framer Motion</p>
+      <p class="footer-copyright">© 2025 Blocky. All rights reserved.</p>
+    </footer>
   </div>
 </body>
 </html>
