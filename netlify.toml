@@ -1,5 +1,5 @@
 [build]
-  command = ""
+  command = "echo 'Serving standalone HTML - no build needed'"
   publish = "public"
 
 [[redirects]]
